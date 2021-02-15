@@ -360,7 +360,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   ///open dialog
   Future<T> _openSelectDialog(T data) {
     return showGeneralDialog(
-      barrierDismissible: true,
+      barrierDismissible: false,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       transitionDuration: const Duration(milliseconds: 400),
       barrierColor: widget.popupBarrierColor ?? const Color(0x80000000),
