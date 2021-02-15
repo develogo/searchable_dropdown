@@ -150,6 +150,8 @@ class DropdownSearch<T> extends StatefulWidget {
   ///set a custom color for the popup barrier
   final Color popupBarrierColor;
 
+  final bool barrierDismissible;
+
   ///text controller to set default search word for example
   final TextEditingController searchBoxController;
 
@@ -209,6 +211,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.searchBoxController,
     this.searchDelay,
     this.onBeforeChange,
+    this.barrierDismissible = true,
   })  : assert(isFilteredOnline != null),
         assert(dropdownBuilderSupportsNullItem != null),
         assert(enabled != null),
@@ -360,7 +363,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   ///open dialog
   Future<T> _openSelectDialog(T data) {
     return showGeneralDialog(
-      barrierDismissible: false,
+      barrierDismissible: widget.barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       transitionDuration: const Duration(milliseconds: 400),
       barrierColor: widget.popupBarrierColor ?? const Color(0x80000000),
