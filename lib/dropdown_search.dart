@@ -152,8 +152,6 @@ class DropdownSearch<T> extends StatefulWidget {
 
   final bool barrierDismissible;
 
-  final bool closeOnBackButton;
-
   ///text controller to set default search word for example
   final TextEditingController searchBoxController;
 
@@ -214,7 +212,6 @@ class DropdownSearch<T> extends StatefulWidget {
     this.searchDelay,
     this.onBeforeChange,
     this.barrierDismissible = true,
-    this.closeOnBackButton = true,
   })  : assert(isFilteredOnline != null),
         assert(dropdownBuilderSupportsNullItem != null),
         assert(enabled != null),
@@ -372,19 +369,11 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       barrierColor: widget.popupBarrierColor ?? const Color(0x80000000),
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) {
-        return WillPopScope(
-          onWillPop: () {
-            if (widget.closeOnBackButton) {
-              Navigator.pop(context, true);
-              return Future.value(false);
-            }
-          },
-          child: AlertDialog(
-            contentPadding: EdgeInsets.all(0),
-            shape: widget.popupShape,
-            backgroundColor: widget.popupBackgroundColor,
-            content: _selectDialogInstance(data),
-          ),
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(0),
+          shape: widget.popupShape,
+          backgroundColor: widget.popupBackgroundColor,
+          content: _selectDialogInstance(data),
         );
       },
     );
